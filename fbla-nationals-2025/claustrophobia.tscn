@@ -1,24 +1,71 @@
-[gd_scene load_steps=2 format=3 uid="uid://h3faoqhfq3mh"]
+[gd_scene load_steps=6 format=3 uid="uid://h3faoqhfq3mh"]
 
 [ext_resource type="Script" uid="uid://du6csqw8i0g1m" path="res://claustrophobia.gd" id="1_watvw"]
+[ext_resource type="PackedScene" uid="uid://ptv2ov3kgqr1" path="res://player.tscn" id="2_qjrqs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ob861"]
+size = Vector2(265, 2886)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qv16s"]
+size = Vector2(235, 2904)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ls15e"]
+size = Vector2(2023, 4626)
 
 [node name="Claustrophobia" type="Node2D"]
 script = ExtResource("1_watvw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(547, -507)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(10, 5)
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(123, -1519)
+shape = SubResource("RectangleShape2D_ob861")
+debug_color = Color(0.988403, 0, 0.302384, 0.42)
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="ColorRect" type="ColorRect" parent="LeftWall"]
+offset_left = -15.0
+offset_top = -1013.0
+offset_right = 255.0
+offset_bottom = -73.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(36, 9)
 
-[node name="Node" type="Node" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(872, -1496)
+shape = SubResource("RectangleShape2D_qv16s")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="RightWall"]
+offset_left = 722.0
+offset_top = -1191.0
+offset_right = 1016.0
+offset_bottom = -65.0
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="Exit" type="Area2D" parent="."]
+position = Vector2(32, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+position = Vector2(1160, -5438)
+shape = SubResource("RectangleShape2D_ls15e")
+
+[node name="ObstacleSpawner" type="Node" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="HUD"]
+anchors_preset = -1
+anchor_left = 0.021
+anchor_top = 0.042
+anchor_right = 0.021
+anchor_bottom = 0.042
+offset_left = 356.808
+offset_top = 71.784
+offset_right = 396.808
+offset_bottom = 94.784
+
+[node name="Player" parent="." instance=ExtResource("2_qjrqs")]
+position = Vector2(585, -622)
